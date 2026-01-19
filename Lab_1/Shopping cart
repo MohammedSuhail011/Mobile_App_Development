@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping Bag & Wishlist</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f4f4f9, #e0e7ff);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 2.2em;
+      text-shadow: 1px 1px 2px #ccc;
+    }
+
+    .buttons {
+      margin: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #addBag {
+      background: #4CAF50;
+      color: white;
+    }
+
+    #addWish {
+      background: #2196F3;
+      color: white;
+    }
+
+    #removeBag {
+      background: #f44336;
+      color: white;
+    }
+
+    #removeWish {
+      background: #ff9800;
+      color: white;
+    }
+
+    .status {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #444;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+
+    .status p {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Shopping Bag & Wishlist</h1>
+  <div class="buttons">
+    <button id="addBag">Add Item to Bag</button>
+    <button id="addWish">Add Item to Wishlist</button>
+    <button id="removeBag">Remove Item from Bag</button>
+    <button id="removeWish">Remove Item from Wishlist</button>
+  </div>
+  <div class="status">
+    <p> Items in Bag: <span id="bagCount">0</span></p>
+    <p> Items in Wishlist: <span id="wishCount">0</span></p>
+  </div>
+
+  <script>
+    let bagCount = 0;
+    let wishCount = 0;
+
+    const bagDisplay = document.getElementById("bagCount");
+    const wishDisplay = document.getElementById("wishCount");
+
+    document.getElementById("addBag").addEventListener("click", () => {
+      bagCount++;
+      bagDisplay.textContent = bagCount;
+    });
+
+    document.getElementById("addWish").addEventListener("click", () => {
+      wishCount++;
+      wishDisplay.textContent = wishCount;
+    });
+
+    document.getElementById("removeBag").addEventListener("click", () => {
+      if (bagCount > 0) {
+        bagCount--;
+        bagDisplay.textContent = bagCount;
+      } else {
+        alert("No items left in the bag to remove!");
+      }
+    });
+
+    document.getElementById("removeWish").addEventListener("click", () => {
+      if (wishCount > 0) {
+        wishCount--;
+        wishDisplay.textContent = wishCount;
+      } else {
+        alert("No items left in the wishlist to remove!");
+      }
+    });
+  </script>
+</body>
+</html>
