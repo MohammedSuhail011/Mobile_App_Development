@@ -1,0 +1,162 @@
+import React from "react";
+import { View, Text, Image, FlatList, StyleSheet, SafeAreaView } from "react-native";
+import { Star } from "lucide-react-native";
+
+const hotels = [
+  {
+    id: "1",
+    name: "Hotel Satu",
+    location: "Indonesia",
+    price: "Rp 1.000.000",
+    rating: 4,
+    image: "https://images.unsplash.com/photo-1501117716987-c8e1ecb210c3",
+  },
+  {
+    id: "2",
+    name: "Hotel Dua",
+    location: "Bali",
+    price: "Rp 1.250.000",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+  },
+  {
+    id: "3",
+    name: "Hotel Tiga",
+    location: "Jakarta",
+    price: "Rp 900.000",
+    rating: 4,
+    image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+  },
+  {
+    id: "4",
+    name: "Hotel Empat",
+    location: "Bandung",
+    price: "Rp 750.000",
+    rating: 3,
+    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",
+  },
+  {
+    id: "5",
+    name: "Hotel Lima",
+    location: "Surabaya",
+    price: "Rp 1.100.000",
+    rating: 4,
+    image: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c",
+  },
+  {
+    id: "6",
+    name: "Hotel Enam",
+    location: "Yogyakarta",
+    price: "Rp 680.000",
+    rating: 3,
+    image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511",
+  },
+  {
+    id: "7",
+    name: "Hotel Tujuh",
+    location: "Lombok",
+    price: "Rp 1.450.000",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1521783988139-893ce39c6f9b",
+  },
+  {
+    id: "8",
+    name: "Hotel Delapan",
+    location: "Medan",
+    price: "Rp 820.000",
+    rating: 4,
+    image: "https://images.unsplash.com/photo-1468824357306-a439d58ccb1c",
+  },
+];
+
+const RatingStars = ({ rating }) => {
+  return (
+    <View style={styles.starRow}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          size={14}
+          color={i < rating ? "#F59E0B" : "#D1D5DB"}
+          fill={i < rating ? "#F59E0B" : "none"}
+        />
+      ))}
+    </View>
+  );
+};
+
+const HotelCard = ({ item }) => (
+  <View style={styles.card}>
+    <Image source={{ uri: item.image }} style={styles.image} />
+
+    <View style={styles.info}>
+      <Text style={styles.name}>{item.name}</Text>
+      <Text style={styles.location}>📍 {item.location}</Text>
+      <RatingStars rating={item.rating} />
+    </View>
+
+    <Text style={styles.price}>{item.price}</Text>
+  </View>
+);
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Pilihan Hotel</Text>
+
+      <FlatList
+        data={hotels}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <HotelCard item={item} />}
+        showsVerticalScrollIndicator={false}
+      />
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#E5E7EB",
+    padding: 16,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "700",
+    marginBottom: 16,
+  },
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#F9FAFB",
+    borderRadius: 16,
+    padding: 12,
+    marginBottom: 12,
+  },
+  image: {
+    width: 70,
+    height: 70,
+    borderRadius: 12,
+  },
+  info: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  location: {
+    fontSize: 12,
+    color: "#6B7280",
+    marginVertical: 2,
+  },
+  starRow: {
+    flexDirection: "row",
+    marginTop: 2,
+  },
+  price: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#7C3AED",
+  },
+});
